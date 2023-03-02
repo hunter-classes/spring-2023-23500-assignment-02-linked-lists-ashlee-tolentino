@@ -30,6 +30,22 @@ int main()
   std::cout << l->contains("z") << std::endl; // 0
   std::cout << "----------------------------------------\n";
   std::cout << l->toString() << std::endl;
+  try{
+    l->remove(6);
+    std::cout << l->toString() << std::endl;
+  } catch (std::exception e){
+    std::cout << "Tried to remove past the end\n";
+  }
+  l->remove(5);
+  std::cout << l->toString() << std::endl;
+  l->remove(4);
+  std::cout << l->toString() << std::endl;
+  l->remove(3);
+  std::cout << l->toString() << std::endl;
+  l->remove(2);
+  std::cout << l->toString() << std::endl;
+  l->remove(1);
+  std::cout << l->toString() << std::endl;
   l->remove(0);
   std::cout << l->toString() << std::endl;
 
