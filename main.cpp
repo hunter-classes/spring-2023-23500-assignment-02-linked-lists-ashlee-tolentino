@@ -28,5 +28,10 @@ int main()
   std::cout << l->contains("inserted at 2") << std::endl; // 1
   std::cout << l->contains("g") << std::endl; // 0
   std::cout << l->contains("z") << std::endl; // 0
+  std::cout << "----------------------------------------\n";
+  std::cout << l->toString() << std::endl;
+  l->remove(0);
+  std::cout << l->toString() << std::endl;
+
   return 0;
 }
