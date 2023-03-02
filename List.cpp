@@ -25,12 +25,12 @@ void List::insert(int loc, std::string data){
   walker = this->head; // start of the list
   trailer = nullptr; // one behind
   
-  while(loc>0 && walker != nullptr){
-    loc=loc-1;
+  while(loc > 0 && walker != nullptr){
+    loc = loc-1;
 
     /* trailer will always be one node
        behind walker */
-    trailer=walker;
+    trailer = walker;
     walker = walker->getNext();
     
   }
@@ -102,3 +102,42 @@ bool List::contains(std::string item){
   return false;
 }
 
+// Removes an item at the specified location
+void List::remove(int loc){
+  Node *walker, *trailer;
+  walker = head->getNext(); // second item of the list
+  trailer = nullptr; // two behind
+  
+  while(loc > 0){
+    loc = loc-1;
+
+    /* trailer will always be two nodes
+       behind walker */
+    trailer = trailer->getNext();
+    walker = walker->getNext();
+  }
+
+  // At this point, trailer points to the Node
+  // BEFORE where we want to remove
+
+
+  // test to see if we're trying to
+  // remove past the end 
+  if (loc > 0){
+    // do something to indicate this is invalid
+    throw std::out_of_range("Our remove is out of range");
+  }
+
+  // Node *newNode = new Node(data);
+  // Removing at true location 0
+  // will have trailer == nullptr
+  // - we have to treat that as a special case
+  if (trailer == nullptr){
+    head = walker;
+  } else if (walker == nullptr){
+    trailer->setNext(walker);
+  } else {
+    // do the regular case 
+    trailer->setNext(walker);
+  }
+}
