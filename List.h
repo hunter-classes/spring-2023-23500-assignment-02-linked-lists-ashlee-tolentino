@@ -16,6 +16,7 @@ class List{
 
   //New functions for project 2 part 1
   bool contains(std::string item);
+  void remove(int loc);
 
   /*
     Try to complete for Monday:
