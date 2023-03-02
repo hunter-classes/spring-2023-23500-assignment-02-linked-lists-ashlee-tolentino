@@ -21,13 +21,14 @@ int main()
   l->insert(5,"inserted at end");
   std::cout << l->toString() << " " << l->length() << "\n";
 
-  // New functions for project 2 part 1
+  // New functions for project 2
   std::cout << "----------------------------------------\n";
   std::cout << l->contains("a") << std::endl; // 1
   std::cout << l->contains("d") << std::endl; // 1
   std::cout << l->contains("inserted at 2") << std::endl; // 1
   std::cout << l->contains("g") << std::endl; // 0
   std::cout << l->contains("z") << std::endl; // 0
+  
   std::cout << "----------------------------------------\n";
   std::cout << l->toString() << std::endl;
   try{
@@ -46,8 +47,11 @@ int main()
   std::cout << l->toString() << std::endl;
   l->remove(1);
   std::cout << l->toString() << std::endl;
-  l->remove(0);
-  std::cout << l->toString() << std::endl;
+  //l->remove(0);
+  //std::cout << l->toString() << std::endl;
+  
+  std::cout << "----------------------------------------\n";
+  delete l;
 
   return 0;
 }
