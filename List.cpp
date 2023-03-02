@@ -105,15 +105,15 @@ bool List::contains(std::string item){
 // Removes an item at the specified location
 void List::remove(int loc){
   Node *walker, *trailer;
-  walker = head->getNext(); // second item of the list
-  trailer = nullptr; // two behind
+  walker = head; // first item of the list
+  trailer = nullptr; // one behind
   
-  while(loc > 0){
+  while(loc > 0 && walker != nullptr){
     loc = loc-1;
 
-    /* trailer will always be two nodes
+    /* trailer will always be one node
        behind walker */
-    trailer = trailer->getNext();
+    trailer = walker;
     walker = walker->getNext();
   }
 
@@ -123,22 +123,24 @@ void List::remove(int loc){
 
   // test to see if we're trying to
   // remove past the end 
-  if (loc > 0){
+  if (walker == nullptr){
     // do something to indicate this is invalid
     throw std::out_of_range("Our remove is out of range");
   }
 
-  // Node *newNode = new Node(data);
-  // Removing at true location 0
+  // Removing at location 0
   // will have trailer == nullptr
   // - we have to treat that as a special case
   if (trailer == nullptr){
-    head = walker;
-  } else if (walker == nullptr){
-    trailer->setNext(walker);
+    // we're removing the first item in the list
+    head = walker->getNext();
+    delete walker;
   } else {
-    // do the regular case 
-    trailer->setNext(walker);
+    // do the regular case
+    // general case of having a node before the
+    // node to delete
+    trailer->setNext(walker->getNext());
+    delete walker;
   }
 }
 
