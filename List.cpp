@@ -146,5 +146,14 @@ void List::remove(int loc){
 
 // destructor
 List::~List(){
-  delete[] head;
+  std::cerr << "Calling the destructor\n";
+  Node *walker = head;
+  Node *trailer = nullptr;
+  while (walker != nullptr) {
+    trailer = walker;
+    walker = walker->getNext();
+    std::cerr << "Deleting " << trailer->getData() << ", ";
+    delete trailer;
+  }
+  std::cerr << "\n";
 }
