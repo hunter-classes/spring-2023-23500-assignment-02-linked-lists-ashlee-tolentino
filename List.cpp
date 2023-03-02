@@ -141,3 +141,8 @@ void List::remove(int loc){
     trailer->setNext(walker);
   }
 }
+
+// destructor
+List::~List(){
+  delete[] head;
+}
