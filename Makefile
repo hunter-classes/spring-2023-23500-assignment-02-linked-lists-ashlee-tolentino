@@ -1,14 +1,20 @@
-OBJECTS=List.o main.o Node.o
-CXXFLAGS=-g
+OBJECTS = OList.o main.o Node.o
+CXXFLAGS = -g
 
 main: $(OBJECTS)
 	g++ -g -o main $(OBJECTS)
 
-List.o: List.cpp Node.h List.h
+tests: tests.o
+	g++ -o tests tests.o
 
-main.o: main.cpp List.h Node.h
+OList.o: OList.cpp Node.h OList.h
+
+main.o: main.cpp OList.h Node.h
 
 Node.o: Node.cpp Node.h
+
+tests.o: tests.cpp doctest.h
+	g++ -c -std=c++11 -Wall tests.cpp
 
 
 clean:
