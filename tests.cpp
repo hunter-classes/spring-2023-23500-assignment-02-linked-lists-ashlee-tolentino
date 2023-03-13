@@ -56,9 +56,7 @@ TEST_CASE("Remove"){
 
 TEST_CASE("Destructor"){
   delete test1;
-  OList *test1 = new OList();
-  
-  //CHECK(test1 == false);
+  OList *test1;
   CHECK((test1->toString()) == "head --> nullptr");
 }
 
