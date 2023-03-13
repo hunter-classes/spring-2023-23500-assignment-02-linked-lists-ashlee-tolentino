@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Node.h"
 #include "OList.h"
 
@@ -21,11 +22,30 @@ OList::~OList(){
   std::cerr << "\n";
 }
 
-// insert at the "front" (head)
-void OList::insert(std::string data){
-  Node *tmp = new Node(data);
-  tmp->setNext(head);
-  head = tmp;
+// Inserts a new node with value into the list in its proper location
+void OList::insert(std::string value){
+  Node *walker;
+  walker = this->head; // start of the list
+
+  if(length() == 0){
+    insert(0, value);
+  }
+  else{
+    int loc = 0;
+    while(walker != nullptr){
+      if((walker->getData().compare(value)) > 0){
+	insert(loc, value);
+	return;
+      }
+      else{
+	loc++;
+	walker = walker->getNext();
+      }
+    }
+    if(walker == nullptr){
+      insert(length(), value);
+    }
+  }
 }
 
 /*
@@ -75,14 +95,6 @@ void OList::insert(int loc, std::string data){
   }
 }
 
-/*
-  Alternate solution:
-  make a private variable to store the length
-  and just return it here.
-
-  Change all the insert/delete/remove type
-  routines to update that variable 
-*/
 int OList::length(){
   int count = 0;
   Node *walker = head;
@@ -132,13 +144,7 @@ std::string OList::get(int loc){
   return tmp->getData();
 }
 
-
-
-
-
-
-
-// Removes an item at the specified location
+// Removes the value at the specified location
 void OList::remove(int loc){
   Node *walker, *trailer;
   walker = head; // first item of the list
@@ -178,4 +184,19 @@ void OList::remove(int loc){
     trailer->setNext(walker->getNext());
     delete walker;
   }
+}
+
+// Reverses the list - it reverses the pointers
+void OList::reverse(){
+  Node *current = head;
+  Node *previous = nullptr;
+  Node *next = nullptr;
+
+  while(current != nullptr){
+    next = current->getNext();
+    current->setNext(previous);
+    previous = current;
+    current = next;
+  }
+  head = previous;
 }
